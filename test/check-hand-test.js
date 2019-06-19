@@ -9,4 +9,9 @@ describe('test winning hands in poker', function () {
     const hand2 = ['12-S', '1-S', '13-S', '10-S', '11-S']
     expect(checkHand(hand2)).to.equal('straight flush')
   })
+  it('test four of a kind', function () {
+    const hand = ['11-S', '11-D', '11-H', '11-C', '10-S']
+    const resultString = checkHand(hand)
+    expect(resultString).to.equal('four of a kind')
+  })
 })
