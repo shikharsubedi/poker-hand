@@ -5,7 +5,7 @@
 
 
 A simple application to determine the type of hand in poker dealt to a player
-List of poker hands: https://en.wikipedia.org/wiki/List_of_poker_hands
+ https://en.wikipedia.org/wiki/List_of_poker_hands
 
 
 
