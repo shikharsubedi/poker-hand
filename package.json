@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "style-fix": "standard --fix src/**/*.js test/**/*.js"
+    "style-fix": "standard --fix --env mocha src/**/*.js test/**/*.js",
+    "lint": "standard --env mocha src/**/*.js test/**/*.js"
   },
   "keywords": [],
   "author": "",

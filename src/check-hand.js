@@ -1,4 +1,7 @@
+'use strict'
+
 const { parseCards, getCountMap } = require('./parse-cards')
+
 function checkHand (hand) {
   const cards = parseCards(hand)
   const countMap = getCountMap(cards)
@@ -26,7 +29,7 @@ function checkHand (hand) {
 /**
  * checks for four of a kind in the hand
  * @param {Map} countMap map of card values and their frequency in the hand
- * @returns boolean
+ * @returns {Boolean}
  */
 function fourOfAKind (countMap) {
   const count = Math.max(...countMap.values())
@@ -34,17 +37,35 @@ function fourOfAKind (countMap) {
 }
 /**
  * checks if there is a full house
+ * Full house is one where there is  three of a kind
+ * and a also a pair in the hand
  * @param {Map} countMap map of values and their frequency
+ * @returns {Boolean}
  */
 function checkFullHouse (countMap) {
-  return false
+  const values = [...countMap.values()]
+  values.sort()
+  const max = values.pop()
+  const second = values.pop()
+  return (max === 3 && second === 2)
 }
 
+/**
+ *This method checks if the hand is a flush
+ * A flush is when the cards are all of the same suite
+ * @param {Array} cards The array of card objects
+ * @returns {Boolean}
+ */
 function checkFlush (cards) {
-  return false
+  return isFlush(cards)
 }
+/**
+ * This method checks if the hand has consecutive numbers but different suites
+ * @param {Array} cards array of card objects
+ * @return {Boolean}
+ */
 function checkStraight (cards) {
-  return false
+  return isSequence(cards)
 }
 function checkTwoPair (cards) {
   return false
@@ -52,6 +73,10 @@ function checkTwoPair (cards) {
 
 function threeOfAKind (countMap) {
   return false
+}
+
+function checkOnePair (countMap) {
+
 }
 
 /**
@@ -79,15 +104,39 @@ function isSequence (cards) {
     }
     return 0
   })
-  if (JSON.stringify(biggestSequence) === JSON.stringify(values)) {
+  if (equalValues(biggestSequence, values)) {
     return true
   }
-  let prev = values.shift()
-  return values.reduce((soFar, current) => {
-    return (soFar && (current === (++prev)))
-  }, true)
+  return isConsecutive(values)
+}
+/**
+ *@param {Array} the array of values
+ *@param {Array} the second array of values
+ *@returns {Boolean}
+ */
+function equalValues (arr1, arr2) {
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false
+    }
+  }
+  return true
 }
 
+/**
+ * This method checks if the cards in a hand are consecutive
+ * @param {Array} values the values in a hand
+ * @return {Boolean}
+ */
+function isConsecutive (values) {
+  let firstValue = values.shift()
+  for (let value of values) {
+    if (!(value === ++firstValue)) {
+      return false
+    }
+    return true
+  }
+}
 /**
  * checks whether the cards are all of the same suite
  * @param {Array} cards Array of card objects

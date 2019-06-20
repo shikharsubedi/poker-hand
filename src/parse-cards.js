@@ -1,3 +1,4 @@
+'use strict'
 /**
  * Parses the hand into array of card objects
  * @param {Array} hand
