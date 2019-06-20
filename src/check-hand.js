@@ -1,27 +1,34 @@
 'use strict'
 
 const { parseCards, getCountMap } = require('./parse-cards')
+const constants = require('./constants')
 
+/**
+ * This method determines the type of hand dealt to a player
+ * @param {Array} hand Array of strings representing cards
+ * @returns {String} the string returned. the string returned is defined in the src/constants.js file
+ */
 function checkHand (hand) {
   const cards = parseCards(hand)
   const countMap = getCountMap(cards)
-  let result = 'high card'
+  let result = constants.HIGH_CARD
+
   if (checkStraightFlush(cards)) {
-    result = 'straight flush'
+    result = constants.STRAIGHT_FLUSH
   } else if (fourOfAKind(countMap)) {
-    result = 'four of a kind'
+    result = constants.FOUR_OF_A_KIND
   } else if (checkFullHouse(countMap)) {
-    result = 'full house'
+    result = constants.FULL_HOUSE
   } else if (checkFlush(cards)) {
-    result = 'flush'
+    result = constants.FLUSH
   } else if (checkStraight(cards)) {
-    result = 'straight'
+    result = constants.STRAIGHT
   } else if (threeOfAKind(countMap)) {
-    result = 'three of a kind'
+    result = constants.THREE_OF_A_KIND
   } else if (checkTwoPair(countMap)) {
-    result = 'two pair'
+    result = constants.TWO_PAIR
   } else if (checkOnePair(cards)) {
-    result = 'one pair'
+    result = constants.ONE_PAIR
   }
   return result
 }
@@ -66,16 +73,26 @@ function checkFlush (cards) {
 function checkStraight (cards) {
   return isSequence(cards)
 }
+/**
+ * TODO
+ * @param {Array} cards
+ */
 function checkTwoPair (cards) {
   return false
 }
-
+/**
+ * TODO
+ * @param {Map} countMap
+ */
 function threeOfAKind (countMap) {
   return false
 }
-
+/**
+ * TODO
+ * @param {Map} countMap
+ */
 function checkOnePair (countMap) {
-
+  return false
 }
 
 /**
@@ -150,4 +167,4 @@ function isFlush (cards) {
   return result
 }
 
-module.exports.checkHand = checkHand
+module.exports = checkHand
