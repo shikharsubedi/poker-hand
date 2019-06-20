@@ -5,26 +5,25 @@ const { parseCards, getCountMap } = require('./parse-cards')
 function checkHand (hand) {
   const cards = parseCards(hand)
   const countMap = getCountMap(cards)
-
+  let result = 'high card'
   if (checkStraightFlush(cards)) {
-    return 'straight flush'
+    result = 'straight flush'
   } else if (fourOfAKind(countMap)) {
-    return 'four of a kind'
+    result = 'four of a kind'
   } else if (checkFullHouse(countMap)) {
-    return 'full house'
+    result = 'full house'
   } else if (checkFlush(cards)) {
-    return 'flush'
+    result = 'flush'
   } else if (checkStraight(cards)) {
-    return 'straight'
+    result = 'straight'
   } else if (threeOfAKind(countMap)) {
-    return 'three of a kind'
+    result = 'three of a kind'
   } else if (checkTwoPair(countMap)) {
-    return 'two pair'
+    result = 'two pair'
   } else if (checkOnePair(cards)) {
-    return 'one pair'
-  } else {
-    return 'high card'
+    result = 'one pair'
   }
+  return result
 }
 /**
  * checks for four of a kind in the hand
