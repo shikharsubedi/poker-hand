@@ -8,10 +8,10 @@ A simple application to determine the type of hand in poker dealt to a player
  https://en.wikipedia.org/wiki/List_of_poker_hands
 
  ## Suite Notation: 
- S : Spades
- H : Hearts
- D : Diamond
- C : Club
+ S : Spades  
+ H : Hearts  
+ D : Diamond  
+ C : Clubs  
 
  ## A single card:
  A single card is denoted by the string `'11-S'` . This is a Jack of Spades
