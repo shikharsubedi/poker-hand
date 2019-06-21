@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "coverage": "nyc --reporter=text-summary npm run test",
     "style-fix": "standard --fix --env mocha src/**/*.js test/**/*.js",
     "lint": "standard --env mocha src/**/*.js test/**/*.js"
   },

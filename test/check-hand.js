@@ -35,4 +35,28 @@ describe('test winning hands in poker', function () {
     const resultString = checkHand(hand)
     expect(resultString).to.equal(constants.STRAIGHT)
   })
+
+  it('test three of a kind', function () {
+    const hand = ['11-S', '11-D', '11-H', '2-C', '10-S']
+    const resultString = checkHand(hand)
+    expect(resultString).to.equal(constants.THREE_OF_A_KIND)
+  })
+
+  it('test two pairs', function () {
+    const hand = ['11-S', '11-D', '10-H', '2-C', '10-S']
+    const resultString = checkHand(hand)
+    expect(resultString).to.equal(constants.TWO_PAIR)
+  })
+
+  it('test one pair', function () {
+    const hand = ['11-S', '11-D', '5-H', '4-C', '3-S']
+    const resultString = checkHand(hand)
+    expect(resultString).to.equal(constants.ONE_PAIR)
+  })
+
+  it('test high card', function () {
+    const hand = ['11-S', '10-D', '5-H', '4-C', '3-S']
+    const resultString = checkHand(hand)
+    expect(resultString).to.equal(constants.HIGH_CARD)
+  })
 })
