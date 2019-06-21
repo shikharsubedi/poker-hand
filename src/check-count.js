@@ -89,7 +89,6 @@ twoPair.returnString = constants.TWO_PAIR
 threeOfAKind.returnString = constants.THREE_OF_A_KIND
 onePair.returnString = constants.ONE_PAIR
 
-
 module.exports = {
   fourOfAKind,
   fullHouse,
