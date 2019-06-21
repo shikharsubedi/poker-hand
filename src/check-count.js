@@ -35,10 +35,7 @@ function fourOfAKind (countMap) {
  * @returns {Boolean}
  */
 function checkFullHouse (countMap) {
-  const values = [...countMap.values()]
-  values.sort()
-  const max = values.pop()
-  const second = values.pop()
+  const { max, second } = getHighestTwo(countMap)
   return (max === 3 && second === 2)
 }
 
@@ -48,12 +45,23 @@ function checkFullHouse (countMap) {
  * @returns {Boolean}
  */
 function checkTwoPair (countMap) {
+  const { max, second } = getHighestTwo(countMap)
+  return (max === 2) && (second === 2)
+}
+
+/**
+ * This metho returns the highest two frequencies in the hand
+ * @param {Map} countMap The map of card values and its frequency in the hand
+ * @return {Object}
+ */
+function getHighestTwo (countMap) {
   const values = [...countMap.values()]
   values.sort()
   const max = values.pop()
   const second = values.pop()
-  return (max === 2) && (second === 2)
+  return { max, second }
 }
+
 /**
  * This method checks for a single pair in a hand
  * @param {Map} countMap The map of card  values and their frequency
