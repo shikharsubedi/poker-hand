@@ -1,17 +1,17 @@
 {
-  "name": "card-hand",
+  "name": "poker-hand",
   "version": "1.0.0",
-  "description": "",
+  "description": "application that identifies a poker hand",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "LOG_HIDE_META=true nyc mocha ./test/unit",
     "coverage": "nyc --reporter=text-summary npm run test",
     "style-fix": "standard --fix --env mocha src/**/*.js test/**/*.js",
     "lint": "standard --env mocha src/**/*.js test/**/*.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Shikhar",
+  "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.1.4",

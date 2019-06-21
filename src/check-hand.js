@@ -1,8 +1,8 @@
 'use strict'
 
-const { parseCards } = require('./parse-cards')
-const constants = require('./constants')
-const { fourOfAKind, checkFullHouse, threeOfAKind, checkTwoPair, checkOnePair, getCountMap } = require('./check-count')
+const { parseHand } = require('./parse-cards')
+const { HIGH_CARD } = require('./constants')
+const { fourOfAKind, checkFullHouse, threeOfAKind, checkTwoPair, checkOnePair } = require('./check-count')
 const { checkStraightFlush, isFlush, checkStraight } = require('./straight-flush')
 
 /**
@@ -11,28 +11,32 @@ const { checkStraightFlush, isFlush, checkStraight } = require('./straight-flush
  * @returns {String} the string returned. the string returned is defined in the src/constants.js file
  */
 function checkHand (hand) {
-  const cards = parseCards(hand)
-  const countMap = getCountMap(cards)
-  let result = constants.HIGH_CARD
+  const parsedHand = parseHand(hand)
+  const testMethods = getTestMethods()
 
-  if (checkStraightFlush(cards)) {
-    result = constants.STRAIGHT_FLUSH
-  } else if (fourOfAKind(countMap)) {
-    result = constants.FOUR_OF_A_KIND
-  } else if (checkFullHouse(countMap)) {
-    result = constants.FULL_HOUSE
-  } else if (isFlush(cards)) {
-    result = constants.FLUSH
-  } else if (checkStraight(cards)) {
-    result = constants.STRAIGHT
-  } else if (threeOfAKind(countMap)) {
-    result = constants.THREE_OF_A_KIND
-  } else if (checkTwoPair(countMap)) {
-    result = constants.TWO_PAIR
-  } else if (checkOnePair(countMap)) {
-    result = constants.ONE_PAIR
+  for (let testMethod of testMethods) {
+    if (testMethod(parsedHand)) {
+      return testMethod.returnString
+    }
   }
-  return result
+  return HIGH_CARD
+}
+/**
+ * This method returns an array of the test methods
+ * ordered according to priority
+ * @returns {Array} the array of methods ordered according to priority
+ */
+function getTestMethods () {
+  return [
+    checkStraightFlush,
+    fourOfAKind,
+    checkFullHouse,
+    isFlush,
+    checkStraight,
+    threeOfAKind,
+    checkTwoPair,
+    checkOnePair
+  ]
 }
 
 module.exports = checkHand

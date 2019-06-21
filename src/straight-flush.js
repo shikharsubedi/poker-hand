@@ -1,11 +1,11 @@
-
+const constants = require('./constants')
 /**
  * This method checks if the hand has consecutive numbers but different suites
  * @param {Array} cards array of card objects
  * @return {Boolean}
  */
-function checkStraight (cards) {
-  return isSequence(cards)
+function checkStraight (parsedHand) {
+  return isSequence(parsedHand.cards)
 }
 
 /**
@@ -13,8 +13,8 @@ function checkStraight (cards) {
  * @param {Array} cards Array of card objects
  * @returns {Boolean}
  */
-function checkStraightFlush (cards) {
-  return isFlush(cards) && isSequence(cards)
+function checkStraightFlush (parsedHand) {
+  return isFlush(parsedHand) && isSequence(parsedHand.cards)
 }
 /**
  * checks whether the card values form a sequence
@@ -65,15 +65,17 @@ function isConsecutive (values) {
  * @param {Array} cards Array of card objects
  * @return {Boolean}}
  */
-function isFlush (cards) {
-  const suites = cards.map(card => card.suite)
+function isFlush (parsedHand) {
+  const suites = parsedHand.cards.map(card => card.suite)
   const suite = suites[0]
   let result = suites.reduce((soFar, current) => {
     return soFar && (current === suite)
   }, true)
   return result
 }
-
+checkStraight.returnString = constants.STRAIGHT
+checkStraightFlush.returnString = constants.STRAIGHT_FLUSH
+isFlush.returnString = constants.FLUSH
 module.exports = {
   checkStraightFlush,
   checkStraight,

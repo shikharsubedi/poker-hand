@@ -1,30 +1,13 @@
 'use strict'
+const constants = require('./constants')
 
-/**
- * This method creates a map of card values as keys
- *  and their frequency as the value
- * @param {Array} cards Array of Card Objects
- * @returns {Map} map of card values and frequency
- */
-function getCountMap (cards) {
-  const map = new Map()
-  cards.forEach(card => {
-    if (!map.has(card.value)) {
-      map.set(card.value, 1)
-    } else {
-      let count = map.get(card.value)
-      map.set(card.value, ++count)
-    }
-  })
-  return map
-}
 /**
  * checks for four of a kind in the hand
  * @param {Map} countMap map of card values and their frequency in the hand
  * @returns {Boolean}
  */
-function fourOfAKind (countMap) {
-  const count = Math.max(...countMap.values())
+function fourOfAKind (parsedHand) {
+  const count = Math.max(...parsedHand.countMap.values())
   return count === 4
 }
 /**
@@ -34,8 +17,8 @@ function fourOfAKind (countMap) {
  * @param {Map} countMap map of values and their frequency
  * @returns {Boolean}
  */
-function checkFullHouse (countMap) {
-  return checkMultiples(countMap, 3, 2)
+function checkFullHouse (parsedHand) {
+  return checkMultiples(parsedHand.countMap, 3, 2)
 }
 
 /**
@@ -52,11 +35,11 @@ function checkMultiples (countMap, first, second) {
 
 /**
  * This method checks for three cards with the same value in a hand
- * @param {Map} countMap The map of card  values and their frequency
+ * @param {Object} The parsedObject consisting of cards and countMap
  * @returns {Boolean}
  */
-function checkTwoPair (countMap) {
-  return checkMultiples(countMap, 2, 2)
+function checkTwoPair (parsedHand) {
+  return checkMultiples(parsedHand.countMap, 2, 2)
 }
 
 /**
@@ -74,29 +57,32 @@ function getHighestTwo (countMap) {
 
 /**
  * This method checks for a single pair in a hand
- * @param {Map} countMap The map of card  values and their frequency
+ * @param {Object} parsedHand The parsedHandObject
  * @returns {Boolean}
  */
-function checkOnePair (countMap) {
-  const count = Math.max(...countMap.values())
+function checkOnePair (parsedHand) {
+  const count = Math.max(...parsedHand.countMap.values())
   return count === 2
 }
 
 /**
  * This method checks for three cards with the same value in a hand
- * @param {Map} countMap The map of card  values and their frequency
+* @param {Object} parsedHand The parsedHandObject
  * @returns {Boolean}
  */
-function threeOfAKind (countMap) {
-  const count = Math.max(...countMap.values())
+function threeOfAKind (parsedHand) {
+  const count = Math.max(...parsedHand.countMap.values())
   return count === 3
 }
-
+fourOfAKind.returnString = constants.FOUR_OF_A_KIND
+checkFullHouse.returnString = constants.FULL_HOUSE
+checkTwoPair.returnString = constants.TWO_PAIR
+threeOfAKind.returnString = constants.THREE_OF_A_KIND
+checkOnePair.returnString = constants.ONE_PAIR
 module.exports = {
   fourOfAKind,
   checkFullHouse,
   checkTwoPair,
   threeOfAKind,
-  getCountMap,
   checkOnePair
 }

@@ -1,8 +1,8 @@
 'use strict'
 
-const checkHand = require('../src/check-hand')
+const checkHand = require('../../src/check-hand')
 const { expect } = require('chai')
-const constants = require('../src/constants')
+const constants = require('../../src/constants')
 
 describe('test winning hands in poker', function () {
   it('test straigt flush', function () {
