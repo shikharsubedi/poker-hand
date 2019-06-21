@@ -27,8 +27,8 @@ A simple application to determine the type of hand in poker dealt to a player
 
 ## The following poker hands are correctly detected by this application
 
-1. Straight flush : `['11-S', '10-S', '9-S', '8-S', '7-S']`
-2. Four of a kind : `['11-S', '11-D', '11-H', '11-C', '10-S']`
+1. Straight flush :e.g. `['11-S', '10-S', '9-S', '8-S', '7-S']`
+2. Four of a kind : e.g. `['11-S', '11-D', '11-H', '11-C', '10-S']`
 3. full house : 
 4. flush :
 5. straight
@@ -38,7 +38,7 @@ A simple application to determine the type of hand in poker dealt to a player
 9. high card :
 
 ## Inspiration
-This project is inspired by the book <a href=https://www.amazon.com/Refactoring-JavaScript-Turning-Code-Into/dp/1491964928>Refactoring Javascript></a> I want to compare my implementation to the books implementation. 
+This project is inspired by the book <a href=https://www.amazon.com/Refactoring-JavaScript-Turning-Code-Into/dp/1491964928 target="_blank">Refactoring Javascript</a> I want to compare my implementation to the one in the book
 Also I have plans to work on a project to compare two poker hands and find out the winner. 
 
 
