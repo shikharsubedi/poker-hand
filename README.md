@@ -8,8 +8,11 @@ A simple application to determine the type of hand in poker dealt to a player
  https://en.wikipedia.org/wiki/List_of_poker_hands
 
  ## Usage
+ This requires ES6 javascript and node 8 to run. There are no external dependencies. There are some dev dependencies
+
+ ## Example
  ```
- const checkHand = require('./check-hand')
+ const checkHand = require('./src/poker-hand')
  console.log(checkHand(['11-S', '10-S', '9-S', '8-S', '7-S'])) // straight flush
  ```
 
@@ -33,6 +36,10 @@ A simple application to determine the type of hand in poker dealt to a player
 7. two pair :
 8. one pair : 
 9. high card :
+
+## Inspiration
+This project is inspired by the book <a href=https://www.amazon.com/Refactoring-JavaScript-Turning-Code-Into/dp/1491964928>Refactoring Javascript></a> I want to compare my implementation to the books implementation. 
+Also I have plans to work on a project to compare two poker hands and find out the winner. 
 
 
 

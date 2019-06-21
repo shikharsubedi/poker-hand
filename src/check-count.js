@@ -3,7 +3,7 @@ const constants = require('./constants')
 
 /**
  * checks for four of a kind in the hand
- * @param {Map} countMap map of card values and their frequency in the hand
+ * @param {Object} parsedHand parsedHand using
  * @returns {Boolean}
  */
 function fourOfAKind (parsedHand) {
@@ -31,7 +31,7 @@ function threeOfAKind (parsedHand) {
 
 /**
  * This method checks for three cards with the same value in a hand
- * @param {Object} The parsedObject consisting of cards and countMap
+ * @param {Object} parsedHand parsedObject consisting of cards and countMap
  * @returns {Boolean}
  */
 function twoPair (parsedHand) {
@@ -88,6 +88,8 @@ fullHouse.returnString = constants.FULL_HOUSE
 twoPair.returnString = constants.TWO_PAIR
 threeOfAKind.returnString = constants.THREE_OF_A_KIND
 onePair.returnString = constants.ONE_PAIR
+
+
 module.exports = {
   fourOfAKind,
   fullHouse,

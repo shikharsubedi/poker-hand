@@ -1,8 +1,17 @@
 const constants = require('./constants')
 
 /**
+ * This method checks if the cards are a sequence and also of the same suite
+ * @param {Array} parsedHand the parsed Hand
+ * @returns {Boolean}
+ */
+function straightFlush (parsedHand) {
+  return flush(parsedHand) && isSequence(parsedHand.cards)
+}
+
+/**
  * checks whether the cards are all of the same suite
- * @param {Array} cards Array of card objects
+ * @param {Array} parsedHand the parsed hand
  * @return {Boolean}}
  */
 function flush (parsedHand) {
@@ -13,20 +22,11 @@ function flush (parsedHand) {
 
 /**
  * This method checks if the hand has consecutive numbers but different suites
- * @param {Array} cards array of card objects
+ * @param {Array} parsedHand the parsed hand see parse-hand.js for details
  * @return {Boolean}
  */
 function straight (parsedHand) {
   return isSequence(parsedHand.cards)
-}
-
-/**
- * This method checks if the cards are a sequence and also of the same suite
- * @param {Array} cards Array of card objects
- * @returns {Boolean}
- */
-function straightFlush (parsedHand) {
-  return flush(parsedHand) && isSequence(parsedHand.cards)
 }
 
 /**
