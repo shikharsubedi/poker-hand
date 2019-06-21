@@ -1,10 +1,22 @@
 const constants = require('./constants')
+
+/**
+ * checks whether the cards are all of the same suite
+ * @param {Array} cards Array of card objects
+ * @return {Boolean}}
+ */
+function flush (parsedHand) {
+  const suites = parsedHand.cards.map(card => card.suite)
+  const firstSuite = suites[0]
+  return suites.every(suite => suite === firstSuite)
+}
+
 /**
  * This method checks if the hand has consecutive numbers but different suites
  * @param {Array} cards array of card objects
  * @return {Boolean}
  */
-function checkStraight (parsedHand) {
+function straight (parsedHand) {
   return isSequence(parsedHand.cards)
 }
 
@@ -13,37 +25,17 @@ function checkStraight (parsedHand) {
  * @param {Array} cards Array of card objects
  * @returns {Boolean}
  */
-function checkStraightFlush (parsedHand) {
-  return isFlush(parsedHand) && isSequence(parsedHand.cards)
+function straightFlush (parsedHand) {
+  return flush(parsedHand) && isSequence(parsedHand.cards)
 }
-/**
- * checks whether the card values form a sequence
- * @param {Array} cards Array of card objects
- * @return {Boolean}}
- */
-function isSequence (cards) {
-  const biggestSequence = [1, 10, 11, 12, 13]
-  const values = cards.map(card => card.value)
-  values.sort((a, b) => {
-    return (a > b) ? 1 : ((a < b) ? -1 : 0)
-  })
-  if (equalValues(biggestSequence, values)) {
-    return true
-  }
-  return isConsecutive(values)
-}
+
 /**
  *@param {Array} the array of values
  *@param {Array} the second array of values
  *@returns {Boolean}
  */
 function equalValues (arr1, arr2) {
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] !== arr2[i]) {
-      return false
-    }
-  }
-  return true
+  return arr1.every((value, index) => value === arr2[index])
 }
 
 /**
@@ -53,32 +45,29 @@ function equalValues (arr1, arr2) {
  */
 function isConsecutive (values) {
   let firstValue = values.shift()
-  for (let value of values) {
-    if (!(value === ++firstValue)) {
-      return false
-    }
-  }
-  return true
+  return values.every(value => value === ++firstValue)
 }
+
 /**
- * checks whether the cards are all of the same suite
+ * checks whether the card values form a poker sequence
  * @param {Array} cards Array of card objects
  * @return {Boolean}}
  */
-function isFlush (parsedHand) {
-  const suites = parsedHand.cards.map(card => card.suite)
-  const suite = suites[0]
-  let result = suites.reduce((soFar, current) => {
-    return soFar && (current === suite)
-  }, true)
-  return result
+function isSequence (cards) {
+  const biggestSequence = [1, 10, 11, 12, 13]
+  let values = cards.map(card => card.value)
+  values.sort((a, b) => (a > b) ? 1 : ((a < b) ? -1 : 0))
+  return (equalValues(values, biggestSequence) ||
+  isConsecutive(values))
 }
-checkStraight.returnString = constants.STRAIGHT
-checkStraightFlush.returnString = constants.STRAIGHT_FLUSH
-isFlush.returnString = constants.FLUSH
+
+straight.returnString = constants.STRAIGHT
+straightFlush.returnString = constants.STRAIGHT_FLUSH
+flush.returnString = constants.FLUSH
+
 module.exports = {
-  checkStraightFlush,
-  checkStraight,
-  isFlush
+  straightFlush,
+  straight,
+  flush
 
 }

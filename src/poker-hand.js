@@ -1,16 +1,16 @@
 'use strict'
 
-const { parseHand } = require('./parse-cards')
+const { parseHand } = require('./parse-hand')
 const { HIGH_CARD } = require('./constants')
-const { fourOfAKind, checkFullHouse, threeOfAKind, checkTwoPair, checkOnePair } = require('./check-count')
-const { checkStraightFlush, isFlush, checkStraight } = require('./straight-flush')
+const { fourOfAKind, fullHouse, threeOfAKind, twoPair, onePair } = require('./check-count')
+const { straightFlush, flush, straight } = require('./straight-flush')
 
 /**
  * This method determines the type of hand dealt to a player
  * @param {Array} hand Array of strings representing cards
  * @returns {String} the string returned. the string returned is defined in the src/constants.js file
  */
-function checkHand (hand) {
+function pokerHand (hand) {
   const parsedHand = parseHand(hand)
   const testMethods = getTestMethods()
 
@@ -28,15 +28,15 @@ function checkHand (hand) {
  */
 function getTestMethods () {
   return [
-    checkStraightFlush,
+    straightFlush,
     fourOfAKind,
-    checkFullHouse,
-    isFlush,
-    checkStraight,
+    fullHouse,
+    flush,
+    straight,
     threeOfAKind,
-    checkTwoPair,
-    checkOnePair
+    twoPair,
+    onePair
   ]
 }
 
-module.exports = checkHand
+module.exports = pokerHand

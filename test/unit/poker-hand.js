@@ -1,6 +1,6 @@
 'use strict'
 
-const checkHand = require('../../src/check-hand')
+const checkHand = require('../../src/poker-hand')
 const { expect } = require('chai')
 const constants = require('../../src/constants')
 
