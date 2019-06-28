@@ -11,7 +11,7 @@ A simple application to determine the type of hand in poker dealt to a player
  This requires ES6 javascript and node 8 to run. There are no external dependencies. There are some dev dependencies
 
  ## Example
- ```
+ ```js
  const checkHand = require('./src/poker-hand')
  console.log(checkHand(['11-S', '10-S', '9-S', '8-S', '7-S'])) // straight flush
  ```
